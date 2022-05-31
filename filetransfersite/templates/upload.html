@@ -5,12 +5,14 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <script src="{% static 'Upload.js' %}"></script>
+        <script src="{% static 'upload.js' %}"></script>
         <title>Upload</title>
     </head>
     <body>
         <h1>Upload file to share</h1>
-        <input type="file" id ="file" name ="upload">
+        <input type="file" id ="fileInput" name ="upload">
+        <h1 id="FileUploaded"></h1>
+        <a id="shareLink"></a>
     </body>
 </html>
 {% endblock %}
