@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="{% static 'upload.js' %}"></script>
+        <title>Upload</title>
+    </head>
+    <body>
+        <h1>Uploaded! Here is your link!</h1>
+        {{filetransfersite.link}}
+    </body>
+</html>
+{% endblock %}
