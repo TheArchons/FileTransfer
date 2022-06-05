@@ -8,7 +8,7 @@ from django.urls import path
 from django.http import FileResponse
 
 directory_path = os.getcwd()
-url = 'http://127.0.0.1:8000/'
+url = 'http://35.165.232.47:8000/'
 
 # Create your views here.
 class fileUploadForm(forms.Form):
