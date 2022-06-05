@@ -3,6 +3,8 @@ from django import forms
 from io import BytesIO
 import os
 from os.path import exists
+import base64
+from filetransfersite.models import files
 
 directory_path = os.getcwd()
 
@@ -27,6 +29,8 @@ def upload(request):
                         destination.write(chunk)
             else:
                 return render(request, 'error.html', {'error': 'Error: File already exists'})
+            encodedname = base64.b64encode(str(file).encode('utf-8'))
+            files.objects.create(title=encodedname, fileName=str(file))
             return render(request, 'index.html', {'url' : 'asd'})
         else:
             #print errors
