@@ -38,7 +38,6 @@ def upload(request):
             #print errors
             print(form.errors)
             return render(request, 'error.html', {'error': form.errors})
-        return render(request, 'upload.html')
     else:
         return render(request, 'upload.html',
             {'form': fileUploadForm()})
