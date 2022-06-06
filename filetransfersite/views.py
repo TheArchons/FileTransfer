@@ -6,6 +6,7 @@ from os.path import exists
 import base64
 from django.urls import path
 from django.http import FileResponse
+from datetime import datetime
 
 directory_path = os.getcwd()
 url = 'http://35.86.14.35:8000/'
@@ -15,9 +16,11 @@ class fileUploadForm(forms.Form):
     file = forms.FileField(label='Select a file')
 
 def index(request):
+    appendIP(request)
     return render(request, 'index.html')
 
 def upload(request):
+    appendIP(request)
     if request.method == "POST":
         form = fileUploadForm(request.POST, request.FILES)
         print(request.FILES['file'].file)
@@ -43,12 +46,26 @@ def upload(request):
             {'form': fileUploadForm()})
 
 def download(request, file_name):
-    print(file_name)
+    appendIP(request)
     file_name = base64.b64decode(file_name).decode('utf-8')
+    print(file_name)
     return FileResponse(open(file_name, 'rb'))
 
 def confirmDownload(request, file_name):
+    appendIP(request)
     print(file_name)
     file_name_decoded = base64.b64decode(file_name).decode('utf-8')
     global url
     return render(request, 'confirmDownload.html', {'downloadURL' : url + 'download/' + file_name, 'filename': file_name_decoded})
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+def appendIP(request):
+    clientIP = get_client_ip(request)
+    open('ip.txt', 'a').write(str(datetime.now()) + '    ' + clientIP + '\n')
