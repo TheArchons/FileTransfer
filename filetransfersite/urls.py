@@ -6,4 +6,5 @@ urlpatterns = [
     path("upload", views.upload, name="upload"),
     path("download/<str:file_name>", views.download, name="download"),
     path("confirmDownload/<str:file_name>", views.confirmDownload, name="confirmDownload"),
+    path("robots.txt", views.robots, name="robots"),
 ]

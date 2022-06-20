@@ -69,3 +69,6 @@ def get_client_ip(request):
 def appendIP(request):
     clientIP = get_client_ip(request)
     open('ip.txt', 'a').write(str(datetime.now()) + '    ' + clientIP + '\n')
+
+def robots(request):
+    return render(request, 'robots.txt')
